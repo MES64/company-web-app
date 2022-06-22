@@ -34,12 +34,49 @@ class ContactUsBody extends React.Component {
 // Pages
 
 class HomePg extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      titles: [],
+      subtitles: [],
+      imageUrls: []
+    };
+  }
+
+  componentDidMount() {
+    const data = fetch('https://interview-assessment.api.avamae.co.uk/api/v1/home/banner-details')
+    .then(response => response.json())
+    .then(inputData => {
+      const details = inputData.Details;
+
+      this.setState({
+        titles: details.map(item => item.Title),
+        subtitles: details.map(item => item.Subtitle),
+        imageUrls: details.map(item => item.ImageUrl)
+      });
+    });
+  }
+
   render() {
+    const { titles, subtitles, imageUrls} = this.state;
+
     return(
       <div>
         <Carousel />
         <div>
-          <p>Learn More</p>
+          <h1>{titles[0]}</h1>
+          <h2>{subtitles[0]}</h2>
+          <p>{imageUrls[0]}</p>
+        </div>
+        <div>
+          <h1>{titles[1]}</h1>
+          <h2>{subtitles[1]}</h2>
+          <p>{imageUrls[1]}</p>
+        </div>
+        <div>
+          <h1>{titles[2]}</h1>
+          <h2>{subtitles[2]}</h2>
+          <p>{imageUrls[2]}</p>
         </div>
         <div>
           <p>Log in</p>
