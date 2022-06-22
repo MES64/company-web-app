@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import './index.css';
+//import App from "./App.js";
 
 // Interesting Components
 
@@ -38,7 +40,6 @@ class HomePg extends React.Component {
         <Carousel />
         <div>
           <p>Learn More</p>
-          <AboutUsBtn />
         </div>
         <div>
           <p>Log in</p>
@@ -46,8 +47,10 @@ class HomePg extends React.Component {
         </div>
         <div>
           <p>Contact Us</p>
-          <ContactUsBtn />
         </div>
+        <nav>
+          <Link to="/about-us">About Us</Link>
+        </nav>
       </div>
     );
   }
@@ -56,7 +59,12 @@ class HomePg extends React.Component {
 class AboutUsPg extends React.Component {
   render() {
     return(
-      <h1>About Us</h1>
+      <div>
+        <h1>About Us</h1>
+        <nav>
+          <Link to="/">Home</Link>
+        </nav>
+      </div>
     );
   }
 }
@@ -75,30 +83,6 @@ class ContactUsPg extends React.Component {
 
 // Buttons
 
-class HomeBtn extends React.Component {
-  render() {
-    return(
-      <button>Home</button>
-    );
-  }
-}
-
-class AboutUsBtn extends React.Component {
-  render() {
-    return(
-      <button>About Us</button>
-    );
-  }
-}
-
-class ContactUsBtn extends React.Component {
-  render() {
-    return(
-      <button>Contact Us</button>
-    );
-  }
-}
-
 class LoginBtn extends React.Component {
   render() {
     return(
@@ -114,21 +98,13 @@ class NavBar extends React.Component {
     return(
       <div>
         <p>Company</p>
-        <HomeBtn />
-        <AboutUsBtn />
-        <ContactUsBtn />
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/about-us">About Us</Link>
+          <Link to="/contact-us">Contact Us</Link>
+        </nav>
         <LoginBtn />
       </div>
-    );
-  }
-}
-
-class Body extends React.Component {
-  render() {
-    return(
-      <HomePg />
-      // <AboutUsPg />
-      // <ContactUsPg />
     );
   }
 }
@@ -138,7 +114,11 @@ class App extends React.Component {
     return(
       <div>
         <NavBar />
-        <Body />
+        <Routes>
+          <Route path="/" element={<HomePg />} />
+          <Route path="/about-us" element={<AboutUsPg />} />
+          <Route path="/contact-us" element={<ContactUsPg />} />
+        </Routes>
         <footer>
           <p>Footer</p>
         </footer>
@@ -150,6 +130,8 @@ class App extends React.Component {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
