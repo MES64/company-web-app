@@ -1,6 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { Navigation, EffectFade } from 'swiper';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
+
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+//import { Navigation, Pagination } from 'swiper';
+
+
+//import 'swiper/swiper.scss';
+//import 'swiper/modules/navigation/navigation.scss';
+//import 'swiper/modules/pagination/pagination.scss';
+
 import './index.css';
 //import App from "./App.js";
 
@@ -44,7 +59,7 @@ class HomePg extends React.Component {
   }
 
   componentDidMount() {
-    const data = fetch('https://interview-assessment.api.avamae.co.uk/api/v1/home/banner-details')
+    fetch('https://interview-assessment.api.avamae.co.uk/api/v1/home/banner-details')
     .then(response => response.json())
     .then(inputData => {
       const details = inputData.Details;
@@ -63,6 +78,26 @@ class HomePg extends React.Component {
     return(
       <div>
         <Carousel />
+        <Swiper
+        modules={[Navigation, EffectFade]}
+        navigation
+        effect
+        speed={800}
+        slidesPerView={1}
+        loop
+        
+        >
+          <SwiperSlide>
+            Slide 1
+          </SwiperSlide>
+          <SwiperSlide>
+            Slide 2
+          </SwiperSlide>
+          <SwiperSlide>
+            Slide 3
+          </SwiperSlide>
+        </Swiper>
+
         <div>
           <h1>{titles[0]}</h1>
           <h2>{subtitles[0]}</h2>
