@@ -1,20 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { useRef } from 'react';
+//import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { Navigation, EffectFade } from 'swiper';
+import { Navigation } from 'swiper';
 import 'swiper/css/navigation';
-import 'swiper/css/effect-fade';
+//import 'swiper/css/effect-fade';
 
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
-//import { Navigation, Pagination } from 'swiper';
-
-
-//import 'swiper/swiper.scss';
-//import 'swiper/modules/navigation/navigation.scss';
-//import 'swiper/modules/pagination/pagination.scss';
 
 import './index.css';
 //import App from "./App.js";
@@ -49,6 +42,9 @@ class ContactUsBody extends React.Component {
 // Pages
 
 class HomePg extends React.Component {
+  // ToDo
+  // - Have the carousel states be props from app component; then only need to use API once
+
   constructor(props) {
     super(props);
     this.state = {
@@ -79,39 +75,32 @@ class HomePg extends React.Component {
       <div>
         <Carousel />
         <Swiper
-        modules={[Navigation, EffectFade]}
+        modules={[Navigation]}
         navigation
         effect
         speed={800}
         slidesPerView={1}
         loop
-        
         >
           <SwiperSlide>
-            Slide 1
+            <h1>{titles[0]}</h1>
+            <h2>{subtitles[0]}</h2>
+            <img src={imageUrls[0]} alt="" class="carouselImg"></img>
           </SwiperSlide>
           <SwiperSlide>
-            Slide 2
+            <h1>{titles[1]}</h1>
+            <h2>{subtitles[1]}</h2>
+            <img src={imageUrls[1]} alt="" class="carouselImg"></img>
           </SwiperSlide>
           <SwiperSlide>
-            Slide 3
+            <h1>{titles[2]}</h1>
+            <h2>{subtitles[2]}</h2>
+            <img src={imageUrls[2]} alt="" class="carouselImg"></img>
           </SwiperSlide>
         </Swiper>
 
         <div>
-          <h1>{titles[0]}</h1>
-          <h2>{subtitles[0]}</h2>
-          <p>{imageUrls[0]}</p>
-        </div>
-        <div>
-          <h1>{titles[1]}</h1>
-          <h2>{subtitles[1]}</h2>
-          <p>{imageUrls[1]}</p>
-        </div>
-        <div>
-          <h1>{titles[2]}</h1>
-          <h2>{subtitles[2]}</h2>
-          <p>{imageUrls[2]}</p>
+          <p>Learn More</p>
         </div>
         <div>
           <p>Log in</p>
@@ -120,9 +109,6 @@ class HomePg extends React.Component {
         <div>
           <p>Contact Us</p>
         </div>
-        <nav>
-          <Link to="/about-us">About Us</Link>
-        </nav>
       </div>
     );
   }
@@ -147,7 +133,17 @@ class ContactUsPg extends React.Component {
       <div>
         <h1>Contact Us</h1>
         <p>Text</p>
-        <ContactUsBody />
+        <form action="https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit" method="POST">
+          <label for="full-name">Full name</label>
+          <input type="text" id="full-name" name="full-name"/><br/>
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email"/><br/>
+          <label for="phone-number">Phone number 01</label>
+          <input type="text" id="phone-number" name="phone-number"/><br/>
+          <label for="message">Message</label><br/>
+          <textarea id="message" name="message"/><br/>
+          <input type="submit"/>
+        </form>
       </div>
     );
   }
