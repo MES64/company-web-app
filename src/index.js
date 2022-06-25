@@ -164,10 +164,40 @@ class ContactUsPg extends React.Component {
       phoneInputIndexes: [1],
       addAddress: false
     };
+    this.state = {
+      FullName: "",
+      EmailAddress: "",
+      PhoneNumbers: [
+        ""
+      ],
+      Message: "",
+      bIncludeAddressDetails: false,
+      AddressDetails: {
+        AddressLine1: "",
+        AddressLine2: "",
+        CityTown: "",
+        StateCounty: "",
+        Postcode: "",
+        Country: ""
+      }
+    };
 
+    this.handleInputChange = this.onInputChange.bind(this);
     this.handleAddPhoneInput = this.addPhoneInput.bind(this);
     this.handleAddAddressInput = this.addAddressInput.bind(this);
-    this.handleSubmit = this.sendData.bind(this);
+    this.handleSubmit = this.onSubmit.bind(this);
+  }
+
+  onInputChange(event) {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
+    switch(name) {
+    case "PhoneNumbers":
+
+    }
+    this.setState({[name] : value});
   }
 
   addPhoneInput() {
@@ -178,6 +208,11 @@ class ContactUsPg extends React.Component {
 
   addAddressInput() {
     this.setState({addAddress: !this.state.addAddress})
+  }
+
+  onSubmit(event) {
+    alert("Form Submitted");
+    event.preventDefault();
   }
 
   sendData() {
@@ -212,15 +247,26 @@ class ContactUsPg extends React.Component {
 
   render() {
     const phoneInputs = this.state.phoneInputIndexes.map(i => 
-      <div key={i}>
-        <label for={i}>Phone number 0{i}</label>
-        <input type="text" id={i} name={i}/><br/>
+      <div key={"phone-number-" + i}>
+        <label for={"phone-number-" + i}>Phone number 0{i}</label>
+        <input type="text" id={"phone-number-" + i} name={"PhoneNumbers[i]"} onChange={this.handleInputChange}/><br/>
       </div>
     );
 
     const addressInputs = this.state.addAddress ? 
     <div>
-      <p>Address Input Here</p>
+      <label for="address-line-1">Address line 1</label>
+      <input type="text" id="address-line-1" name="AddressDetails[AddressLine1]" onChange={this.handleInputChange}/><br/>
+      <label for="address-line-2">Address line 2</label>
+      <input type="text" id="address-line-2" name="AddressDetails[AddressLine2]" onChange={this.handleInputChange}/><br/>
+      <label for="city-or-town">City/Town</label>
+      <input type="text" id="city-or-town" name="AddressDetails[CityTown]" onChange={this.handleInputChange}/><br/>
+      <label for="state-or-county">State/County</label>
+      <input type="text" id="state-or-county" name="AddressDetails[StateCounty]" onChange={this.handleInputChange}/><br/>
+      <label for="postcode">Postcode</label>
+      <input type="text" id="postcode" name="AddressDetails[Postcode]" onChange={this.handleInputChange}/><br/>
+      <label for="country">Country</label>
+      <input type="text" id="country" name="AddressDetails[Country]" onChange={this.handleInputChange}/><br/>
     </div>
     : 
     <div/>;
@@ -230,22 +276,24 @@ class ContactUsPg extends React.Component {
         <h1>Contact Us</h1>
         <p>Text</p>
 
-        <label for="full-name">Full name</label>
-        <input type="text" id="full-name" name="full-name"/><br/>
-        <label for="email">Email address</label>
-        <input type="email" id="email" name="email"/><br/>
+        <form onSubmit={this.handleSubmit}>
+          <label for="full-name">Full name</label>
+          <input type="text" id="full-name" name="FullName" onChange={this.handleInputChange}/><br/>
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="EmailAddress" onChange={this.handleInputChange}/><br/>
 
-        <div>{phoneInputs}</div>
-        <button onClick={this.handleAddPhoneInput}>Add new phone number</button><br/>
+          <div>{phoneInputs}</div>
+          <button onClick={this.handleAddPhoneInput}>Add new phone number</button><br/>
 
-        <label for="message">Message</label><br/>
-        <textarea id="message" name="message"/><br/>
+          <label for="message">Message</label><br/>
+          <textarea id="message" name="Message" onChange={this.handleInputChange}/><br/>
 
-        <input type="checkbox" id="add-address" onClick={this.handleAddAddressInput}/>
-        <label for="add-address">Add address details</label><br/>
-        <div>{addressInputs}</div>
+          <input type="checkbox" id="add-address" name="bIncludeAddressDetails" onChange={this.handleInputChange}/>
+          <label for="add-address">Add address details</label><br/>
+          <div>{addressInputs}</div>
 
-        <button onClick={this.handleSubmit}>Submit</button>
+          <input type="submit" value="Submit"/>
+        </form>
       </div>
     );
   }
