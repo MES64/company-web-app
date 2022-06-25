@@ -127,13 +127,25 @@ class AboutUsPg extends React.Component {
   }
 }
 
-class ContactUsPg extends React.Component {
-  render() {
-    return(
-      <div>
-        <h1>Contact Us</h1>
-        <p>Text</p>
-        <form action="https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit" method="POST">
+//  action="https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit" method="POST"
+
+/* <fieldset>
+            <legend>Address</legend>
+            <label for="address-line-1">Address line 1</label>
+            <input type="text" id="address-line-1" name="address-line-1"/><br/>
+            <label for="address-line-2">Address line 2</label>
+            <input type="text" id="address-line-2" name="address-line-2"/><br/>
+            <label for="city-or-town">City/Town</label>
+            <input type="text" id="city-or-town" name="city-or-town"/><br/>
+            <label for="state-or-county">State/County</label>
+            <input type="text" id="state-or-county" name="state-or-county"/><br/>
+            <label for="postcode">Postcode</label>
+            <input type="text" id="postcode" name="postcode"/><br/>
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country"/><br/>
+          </fieldset> */
+
+/* <form action="https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit" method="POST">
           <label for="full-name">Full name</label>
           <input type="text" id="full-name" name="full-name"/><br/>
           <label for="email">Email address</label>
@@ -143,7 +155,97 @@ class ContactUsPg extends React.Component {
           <label for="message">Message</label><br/>
           <textarea id="message" name="message"/><br/>
           <input type="submit"/>
-        </form>
+        </form> */
+
+class ContactUsPg extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      phoneInputIndexes: [1],
+      addAddress: false
+    };
+
+    this.handleAddPhoneInput = this.addPhoneInput.bind(this);
+    this.handleAddAddressInput = this.addAddressInput.bind(this);
+    this.handleSubmit = this.sendData.bind(this);
+  }
+
+  addPhoneInput() {
+      const newPhoneInputIndexes = this.state.phoneInputIndexes.slice();
+      newPhoneInputIndexes.push(newPhoneInputIndexes.length + 1);
+      this.setState({phoneInputIndexes: newPhoneInputIndexes});
+  }
+
+  addAddressInput() {
+    this.setState({addAddress: !this.state.addAddress})
+  }
+
+  sendData() {
+    const inData = 
+    {
+      "FullName": "Mark Skelton",
+      "EmailAddress": "ms10@gmail.com",
+      "PhoneNumbers": [
+        "07712345678"
+      ],
+      "Message": "hello",
+      "bIncludeAddressDetails": true,
+      "AddressDetails": {
+        "AddressLine1": "1 Street Road",
+        "AddressLine2": "Place",
+        "CityTown": "Sometown",
+        "StateCounty": "Somewhere",
+        "Postcode": "KY8 3YU",
+        "Country": "United Kingdom"
+      }
+    };
+
+    fetch("https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit", {
+      method: "Post",
+      headers: {"Content-Type": "application/json",},
+      body: JSON.stringify(inData),
+    })
+    .then(response => response.json())
+    .then(outData => console.log("Response:", outData))
+    .catch(error => console.error("Error:", error));
+  }
+
+  render() {
+    const phoneInputs = this.state.phoneInputIndexes.map(i => 
+      <div key={i}>
+        <label for={i}>Phone number 0{i}</label>
+        <input type="text" id={i} name={i}/><br/>
+      </div>
+    );
+
+    const addressInputs = this.state.addAddress ? 
+    <div>
+      <p>Address Input Here</p>
+    </div>
+    : 
+    <div/>;
+
+    return(
+      <div>
+        <h1>Contact Us</h1>
+        <p>Text</p>
+
+        <label for="full-name">Full name</label>
+        <input type="text" id="full-name" name="full-name"/><br/>
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email"/><br/>
+
+        <div>{phoneInputs}</div>
+        <button onClick={this.handleAddPhoneInput}>Add new phone number</button><br/>
+
+        <label for="message">Message</label><br/>
+        <textarea id="message" name="message"/><br/>
+
+        <input type="checkbox" id="add-address" onClick={this.handleAddAddressInput}/>
+        <label for="add-address">Add address details</label><br/>
+        <div>{addressInputs}</div>
+
+        <button onClick={this.handleSubmit}>Submit</button>
       </div>
     );
   }
