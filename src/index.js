@@ -161,10 +161,6 @@ class ContactUsPg extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      phoneInputIndexes: [1],
-      addAddress: false
-    };
-    this.state = {
       FullName: "",
       EmailAddress: "",
       PhoneNumbers: [
@@ -184,7 +180,6 @@ class ContactUsPg extends React.Component {
 
     this.handleInputChange = this.onInputChange.bind(this);
     this.handleAddPhoneInput = this.addPhoneInput.bind(this);
-    this.handleAddAddressInput = this.addAddressInput.bind(this);
     this.handleSubmit = this.onSubmit.bind(this);
   }
 
@@ -192,27 +187,45 @@ class ContactUsPg extends React.Component {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
+    console.log(name);
 
-    switch(name) {
-    case "PhoneNumbers":
-
+    if (name.includes("[")) {
+      if (name.includes("PhoneNumbers")) {
+        const newPhoneNumbers = this.state.PhoneNumbers.slice();
+        const i = name[name.length-2];
+        newPhoneNumbers[i] = value;
+        this.setState({PhoneNumbers : newPhoneNumbers});
+      }
+      else {//repeat above below; also could just use old method in onSubmit function and avoid the usual submission
+        const newAddressDetails = this.state.AddressDetails.slice();
+        const inputName = target.id;
+        newAddressDetails[inputName] = value;
+        this.setState({AddressDetails : newAddressDetails});
+      }
     }
-    this.setState({[name] : value});
+    else {
+      this.setState({[name] : value});
+    }
   }
 
   addPhoneInput() {
-      const newPhoneInputIndexes = this.state.phoneInputIndexes.slice();
-      newPhoneInputIndexes.push(newPhoneInputIndexes.length + 1);
-      this.setState({phoneInputIndexes: newPhoneInputIndexes});
+      const newPhoneNumbers = this.state.PhoneNumbers.slice();
+      newPhoneNumbers.push("");
+      this.setState({PhoneNumbers: newPhoneNumbers});
   }
 
-  addAddressInput() {
-    this.setState({addAddress: !this.state.addAddress})
-  }
-
-  onSubmit(event) {
-    alert("Form Submitted");
+  async onSubmit(event) {
     event.preventDefault();
+
+    const formObject = new FormData(event.target);
+    console.log(formObject.get("PhoneNumbers[]"));
+
+    const resp = await fetch(event.target.action, {
+      method: "POST",
+      body: new URLSearchParams(formObject)
+    });
+    const body = await resp.json();
+    console.log(body);
   }
 
   sendData() {
@@ -246,27 +259,28 @@ class ContactUsPg extends React.Component {
   }
 
   render() {
-    const phoneInputs = this.state.phoneInputIndexes.map(i => 
-      <div key={"phone-number-" + i}>
-        <label for={"phone-number-" + i}>Phone number 0{i}</label>
-        <input type="text" id={"phone-number-" + i} name={"PhoneNumbers[i]"} onChange={this.handleInputChange}/><br/>
+    const phoneNumbersIndexes = Array.from(this.state.PhoneNumbers.keys());
+    const phoneInputs = phoneNumbersIndexes.map(i => 
+      <div key={i}>
+        <label for={i}>Phone number 0{i+1}</label>
+        <input type="text" id={i} name={"PhoneNumbers[" + i + "]"} value={this.state.PhoneNumbers[i]} onChange={this.handleInputChange}/><br/>
       </div>
     );
 
-    const addressInputs = this.state.addAddress ? 
+    const addressInputs = this.state.bIncludeAddressDetails ? 
     <div>
       <label for="address-line-1">Address line 1</label>
-      <input type="text" id="address-line-1" name="AddressDetails[AddressLine1]" onChange={this.handleInputChange}/><br/>
+      <input type="text" id="AddressLine1" name="AddressDetails[AddressLine1]" value={this.state.AddressDetails.AddressLine1} onChange={this.handleInputChange}/><br/>
       <label for="address-line-2">Address line 2</label>
-      <input type="text" id="address-line-2" name="AddressDetails[AddressLine2]" onChange={this.handleInputChange}/><br/>
+      <input type="text" id="AddressLine2" name="AddressDetails[AddressLine2]" value={this.state.AddressDetails.AddressLine2} onChange={this.handleInputChange}/><br/>
       <label for="city-or-town">City/Town</label>
-      <input type="text" id="city-or-town" name="AddressDetails[CityTown]" onChange={this.handleInputChange}/><br/>
+      <input type="text" id="CityTown" name="AddressDetails[CityTown]" value={this.state.AddressDetails.CityTown} onChange={this.handleInputChange}/><br/>
       <label for="state-or-county">State/County</label>
-      <input type="text" id="state-or-county" name="AddressDetails[StateCounty]" onChange={this.handleInputChange}/><br/>
+      <input type="text" id="StateCounty" name="AddressDetails[StateCounty]" value={this.state.AddressDetails.StateCounty} onChange={this.handleInputChange}/><br/>
       <label for="postcode">Postcode</label>
-      <input type="text" id="postcode" name="AddressDetails[Postcode]" onChange={this.handleInputChange}/><br/>
+      <input type="text" id="Postcode" name="AddressDetails[Postcode]" value={this.state.AddressDetails.Postcode} onChange={this.handleInputChange}/><br/>
       <label for="country">Country</label>
-      <input type="text" id="country" name="AddressDetails[Country]" onChange={this.handleInputChange}/><br/>
+      <input type="text" id="Country" name="AddressDetails[Country]" value={this.state.AddressDetails.Country} onChange={this.handleInputChange}/><br/>
     </div>
     : 
     <div/>;
@@ -276,19 +290,19 @@ class ContactUsPg extends React.Component {
         <h1>Contact Us</h1>
         <p>Text</p>
 
-        <form onSubmit={this.handleSubmit}>
+        <form action="https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit" method="POST" onSubmit={this.handleSubmit}>
           <label for="full-name">Full name</label>
-          <input type="text" id="full-name" name="FullName" onChange={this.handleInputChange}/><br/>
+          <input type="text" id="full-name" name="FullName" value={this.state.FullName} onChange={this.handleInputChange}/><br/>
           <label for="email">Email address</label>
-          <input type="email" id="email" name="EmailAddress" onChange={this.handleInputChange}/><br/>
+          <input type="email" id="email" name="EmailAddress" value={this.state.EmailAddress} onChange={this.handleInputChange}/><br/>
 
           <div>{phoneInputs}</div>
-          <button onClick={this.handleAddPhoneInput}>Add new phone number</button><br/>
+          <button type="button" onClick={this.handleAddPhoneInput}>Add new phone number</button><br/>
 
           <label for="message">Message</label><br/>
-          <textarea id="message" name="Message" onChange={this.handleInputChange}/><br/>
+          <textarea id="message" name="Message" value={this.state.Message} onChange={this.handleInputChange}/><br/>
 
-          <input type="checkbox" id="add-address" name="bIncludeAddressDetails" onChange={this.handleInputChange}/>
+          <input type="checkbox" id="add-address" name="bIncludeAddressDetails" checked={this.state.bIncludeAddressDetails} onChange={this.handleInputChange}/>
           <label for="add-address">Add address details</label><br/>
           <div>{addressInputs}</div>
 
