@@ -196,9 +196,9 @@ class ContactUsPg extends React.Component {
         newPhoneNumbers[i] = value;
         this.setState({PhoneNumbers : newPhoneNumbers});
       }
-      else {//repeat above below; also could just use old method in onSubmit function and avoid the usual submission
-        const newAddressDetails = this.state.AddressDetails.slice();
-        const inputName = target.id;
+      else {
+        const newAddressDetails = structuredClone(this.state.AddressDetails);
+        const inputName = name.substring(15,name.length-1);
         newAddressDetails[inputName] = value;
         this.setState({AddressDetails : newAddressDetails});
       }
@@ -214,7 +214,7 @@ class ContactUsPg extends React.Component {
       this.setState({PhoneNumbers: newPhoneNumbers});
   }
 
-  async onSubmit(event) {
+  /*async onSubmit(event) {
     event.preventDefault();
 
     const formObject = new FormData(event.target);
@@ -226,6 +226,23 @@ class ContactUsPg extends React.Component {
     });
     const body = await resp.json();
     console.log(body);
+  }*/
+
+  onSubmit(event) {
+    event.preventDefault();
+
+    const postData = structuredClone(this.state);
+
+    fetch("https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit", {
+      method: "Post",
+      headers: {"Content-Type": "application/json",},
+      body: JSON.stringify(postData),
+    })
+    .then(response => response.json())
+    .then(respData => console.log("Response:", respData))
+    .catch(error => console.error("Error:", error));
+
+    return false;
   }
 
   sendData() {
