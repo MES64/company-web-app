@@ -1,85 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-//import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Navigation } from 'swiper';
 import 'swiper/css/navigation';
-//import 'swiper/css/effect-fade';
 
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import './index.css';
-//import App from "./App.js";
 
 import imgOffice2 from "./Resources/shutterstock_696636415.jpg";
-import imgWoman2 from "./Resources/shutterstock_1302552622.jpg";
-import imgContact from "./Resources/Img_Contact.png";
-import imgSubmit from "./Resources/Icon_Submit.svg";
 import { ReactComponent as Logo } from "./Resources/Logo.svg";
-
-// Interesting Components
-
-class Carousel extends React.Component {
-  render () {
-    return(
-      <h2>Carousel</h2>
-    );
-  }
-}
-
-class ContactForm extends React.Component {
-  render () {
-    return(
-      <p>Contact Form</p>
-    );
-  }
-}
-
-class ContactUsBody extends React.Component {
-  render () {
-    return(
-      <ContactForm />
-      // <p>Submission Message</p>
-    );
-  }
-}
 
 // Pages
 
 class HomePg extends React.Component {
-  // ToDo
-  // - Have the carousel states be props from app component; then only need to use API once
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      titles: [],
-      subtitles: [],
-      imageUrls: []
-    };
-  }
-
-  componentDidMount() {
-    fetch('https://interview-assessment.api.avamae.co.uk/api/v1/home/banner-details')
-    .then(response => response.json())
-    .then(inputData => {
-      const details = inputData.Details;
-
-      this.setState({
-        titles: details.map(item => item.Title),
-        subtitles: details.map(item => item.Subtitle),
-        imageUrls: details.map(item => item.ImageUrl)
-      });
-    });
-  }
-
   render() {
-    const { titles, subtitles, imageUrls} = this.state;
+    const { titles, subtitles, imageUrls} = this.props;
 
     return(
       <div>
-        <Carousel />
         <Swiper
         modules={[Navigation]}
         navigation
@@ -90,34 +30,69 @@ class HomePg extends React.Component {
         >
           <SwiperSlide>
             <div class="carouselImg">
-              <h1 class="carouselTitle">{titles[0]}</h1>
-              <h2 class="carouselText">{subtitles[0]}</h2>
-              <img src={imageUrls[0]} alt="" class="img"/>
+              <h1 class="carouselGeneralText carouselTitle">{titles[0]}</h1>
+              <h2 class="carouselGeneralText carouselText">{subtitles[0]}</h2>
+              <Link class="btnLink carouselBtn" to="/contact-us">Contact Us</Link>
+              <img src={imageUrls[0]} alt="" class="img img1"/>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div class="carouselImg">
-              <h1 class="carouselTitle">{titles[1]}</h1>
-              <h2 class="carouselText">{subtitles[1]}</h2>
-              <img src={imageUrls[1]} alt="" class="img"/>
+              <h1 class="carouselGeneralText carouselTitle">{titles[1]}</h1>
+              <h2 class="carouselGeneralText carouselText">{subtitles[1]}</h2>
+              <img src={imageUrls[1]} alt="" class="img img2"/>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div class="carouselImg">
-              <h1 class="carouselTitle">{titles[2]}</h1>
-              <h2 class="carouselText">{subtitles[2]}</h2>
+              <h1 class="carouselGeneralText carouselTitle">{titles[2]}</h1>
+              <h2 class="carouselGeneralText carouselText">{subtitles[2]}</h2>
               <img src={imageUrls[2]} alt="" class="img"/>
             </div>
           </SwiperSlide>
         </Swiper>
 
         <div class="learnMore">
-          <p>Learn More</p>
+          <div class="learnMoreText">
+            <h1 class="largeTitle">Justo pententium te vix, scripta regione urbanitas</h1>
+            <br/>
+            <p class="text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+              Quem vide tincidunt pri ei, id mea omnium denique. 
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <ul>
+              <li class="text bold">
+                Te pri efficiendi assueverit, id molestie suavitate per
+              </li>
+              <li class="text bold">
+                Te nam dolorem rationibus repudiandae, ne ius falli aliquip consetetur
+              </li>
+              <li class="text bold">
+                Ut qui decant copiosae interpretaris
+              </li>
+              <li class="text bold">
+                Ut indoctum patrioque voluptaria duo, ut vis semper abhorreant
+              </li>
+            </ul>
+            <br/>
+            <Link class="btnLink" to="/about-us">Learn More</Link>
+          </div>
           <img src={imgOffice2} class="learnMoreImg"/>
         </div>
         <div class="loginSection">
           <div class="grayBox">
-            <p>Log in</p>
+            <h1 class="largeTitle white">Nulla sem urna, dictum sed nisi in, viverra rutrum neque</h1>
+            <br/>
+            <p class="text white">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+              Quem vide tincidunt pri ei, id mea omnium denique. 
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare.  
+            </p>
+            <br/>
             <LoginBtn />
           </div>
         </div>
@@ -258,36 +233,6 @@ class AboutUsPg extends React.Component {
   }
 }
 
-//  action="https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit" method="POST"
-
-/* <fieldset>
-            <legend>Address</legend>
-            <label for="address-line-1">Address line 1</label>
-            <input type="text" id="address-line-1" name="address-line-1"/><br/>
-            <label for="address-line-2">Address line 2</label>
-            <input type="text" id="address-line-2" name="address-line-2"/><br/>
-            <label for="city-or-town">City/Town</label>
-            <input type="text" id="city-or-town" name="city-or-town"/><br/>
-            <label for="state-or-county">State/County</label>
-            <input type="text" id="state-or-county" name="state-or-county"/><br/>
-            <label for="postcode">Postcode</label>
-            <input type="text" id="postcode" name="postcode"/><br/>
-            <label for="country">Country</label>
-            <input type="text" id="country" name="country"/><br/>
-          </fieldset> */
-
-/* <form action="https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit" method="POST">
-          <label for="full-name">Full name</label>
-          <input type="text" id="full-name" name="full-name"/><br/>
-          <label for="email">Email address</label>
-          <input type="email" id="email" name="email"/><br/>
-          <label for="phone-number">Phone number 01</label>
-          <input type="text" id="phone-number" name="phone-number"/><br/>
-          <label for="message">Message</label><br/>
-          <textarea id="message" name="message"/><br/>
-          <input type="submit"/>
-        </form> */
-
 class ContactUsPg extends React.Component {
   constructor(props){
     super(props);
@@ -345,20 +290,6 @@ class ContactUsPg extends React.Component {
       this.setState({PhoneNumbers: newPhoneNumbers});
   }
 
-  /*async onSubmit(event) {
-    event.preventDefault();
-
-    const formObject = new FormData(event.target);
-    console.log(formObject.get("PhoneNumbers[]"));
-
-    const resp = await fetch(event.target.action, {
-      method: "POST",
-      body: new URLSearchParams(formObject)
-    });
-    const body = await resp.json();
-    console.log(body);
-  }*/
-
   onSubmit(event) {
     event.preventDefault();
 
@@ -370,40 +301,19 @@ class ContactUsPg extends React.Component {
       body: JSON.stringify(postData),
     })
     .then(response => response.json())
-    .then(respData => console.log("Response:", respData))
+    .then(respData => {
+      console.log("Response:", respData);
+
+      if (respData.Errors.length > 0) {
+        alert(respData.Errors[0].FieldName + " " + respData.Errors[0].MessageCode);
+      }
+      else {
+        alert("Your message has been sent \nWe will be in contact with you within 24 hours.");
+      }
+    })
     .catch(error => console.error("Error:", error));
 
     return false;
-  }
-
-  sendData() {
-    const inData = 
-    {
-      "FullName": "Mark Skelton",
-      "EmailAddress": "ms10@gmail.com",
-      "PhoneNumbers": [
-        "07712345678"
-      ],
-      "Message": "hello",
-      "bIncludeAddressDetails": true,
-      "AddressDetails": {
-        "AddressLine1": "1 Street Road",
-        "AddressLine2": "Place",
-        "CityTown": "Sometown",
-        "StateCounty": "Somewhere",
-        "Postcode": "KY8 3YU",
-        "Country": "United Kingdom"
-      }
-    };
-
-    fetch("https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit", {
-      method: "Post",
-      headers: {"Content-Type": "application/json",},
-      body: JSON.stringify(inData),
-    })
-    .then(response => response.json())
-    .then(outData => console.log("Response:", outData))
-    .catch(error => console.error("Error:", error));
   }
 
   render() {
@@ -515,12 +425,35 @@ class NavBar extends React.Component {
 }
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      titles: [],
+      subtitles: [],
+      imageUrls: []
+    };
+  }
+
+  componentDidMount() {
+    fetch('https://interview-assessment.api.avamae.co.uk/api/v1/home/banner-details')
+    .then(response => response.json())
+    .then(inputData => {
+      const details = inputData.Details;
+
+      this.setState({
+        titles: details.map(item => item.Title),
+        subtitles: details.map(item => item.Subtitle),
+        imageUrls: details.map(item => item.ImageUrl)
+      });
+    });
+  }
+
   render() {
     return(
       <div>
         <NavBar />
         <Routes>
-          <Route path="/" element={<HomePg />} />
+          <Route path="/" element={<HomePg titles={this.state.titles} subtitles={this.state.subtitles} imageUrls={this.state.imageUrls} />} />
           <Route path="/about-us" element={<AboutUsPg />} />
           <Route path="/contact-us" element={<ContactUsPg />} />
         </Routes>
