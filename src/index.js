@@ -12,6 +12,12 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import './index.css';
 //import App from "./App.js";
 
+import imgOffice2 from "./Resources/shutterstock_696636415.jpg";
+import imgWoman2 from "./Resources/shutterstock_1302552622.jpg";
+import imgContact from "./Resources/Img_Contact.png";
+import imgSubmit from "./Resources/Icon_Submit.svg";
+import { ReactComponent as Logo } from "./Resources/Logo.svg";
+
 // Interesting Components
 
 class Carousel extends React.Component {
@@ -83,31 +89,100 @@ class HomePg extends React.Component {
         loop
         >
           <SwiperSlide>
-            <h1>{titles[0]}</h1>
-            <h2>{subtitles[0]}</h2>
-            <img src={imageUrls[0]} alt="" class="carouselImg"></img>
+            <div class="carouselImg">
+              <h1 class="carouselTitle">{titles[0]}</h1>
+              <h2 class="carouselText">{subtitles[0]}</h2>
+              <img src={imageUrls[0]} alt="" class="img"/>
+            </div>
           </SwiperSlide>
           <SwiperSlide>
-            <h1>{titles[1]}</h1>
-            <h2>{subtitles[1]}</h2>
-            <img src={imageUrls[1]} alt="" class="carouselImg"></img>
+            <div class="carouselImg">
+              <h1 class="carouselTitle">{titles[1]}</h1>
+              <h2 class="carouselText">{subtitles[1]}</h2>
+              <img src={imageUrls[1]} alt="" class="img"/>
+            </div>
           </SwiperSlide>
           <SwiperSlide>
-            <h1>{titles[2]}</h1>
-            <h2>{subtitles[2]}</h2>
-            <img src={imageUrls[2]} alt="" class="carouselImg"></img>
+            <div class="carouselImg">
+              <h1 class="carouselTitle">{titles[2]}</h1>
+              <h2 class="carouselText">{subtitles[2]}</h2>
+              <img src={imageUrls[2]} alt="" class="img"/>
+            </div>
           </SwiperSlide>
         </Swiper>
 
-        <div>
+        <div class="learnMore">
           <p>Learn More</p>
+          <img src={imgOffice2} class="learnMoreImg"/>
         </div>
-        <div>
-          <p>Log in</p>
-          <LoginBtn />
+        <div class="loginSection">
+          <div class="grayBox">
+            <p>Log in</p>
+            <LoginBtn />
+          </div>
         </div>
-        <div>
-          <p>Contact Us</p>
+        <div class="contactUsSection">
+          <h1 class="title center">Sed libero justo, lobortis sit amet suscipit non</h1>
+          <h2 class="subtitle center">taria duo ut vis semper abhorreant</h2>
+          <div class="textCols">
+            <div class="textCol">
+              <p class="text bold">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+              </p>
+              <br/>
+              <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare.  
+              </p>
+            </div>
+            <div class="textCol">
+              <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+              </p>
+              <br/>
+              <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+              </p>
+            </div>
+            <div class="textCol">
+              <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+              </p>
+              <br/>
+              <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+                Quem vide tincidunt pri ei, id mea omnium denique. 
+              </p>
+            </div>
+          </div>
+          <Link class="btnLink" to="/contact-us">Contact Us</Link>
         </div>
       </div>
     );
@@ -117,11 +192,67 @@ class HomePg extends React.Component {
 class AboutUsPg extends React.Component {
   render() {
     return(
-      <div>
-        <h1>About Us</h1>
-        <nav>
-          <Link to="/">Home</Link>
-        </nav>
+      <div class="container">
+        <h1 class="title">About Us</h1>
+        <p class="text bold">Populo facilisi nam no, dolor deleniti deseruisse ne cum, nam quodsi aliquam eligendi ne. Ferri euismod accusata te nec, summo accumsan at vix.</p>
+        <p class="text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+          Quem vide tincidunt pri ei, id mea omnium denique. 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+          Quem vide tincidunt pri ei, id mea omnium denique. 
+        </p>
+        <br/>
+        <p class="text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+          Quem vide tincidunt pri ei, id mea omnium denique. 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+          Quem vide tincidunt pri ei, id mea omnium denique. 
+        </p>
+        <img src={imgOffice2} class="aboutUsImg"/>
+        <p class="text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+          Quem vide tincidunt pri ei, id mea omnium denique. 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+          Quem vide tincidunt pri ei, id mea omnium denique. 
+        </p>
+        <h2 class="subtitle">Taria duo ut vis semper abhorreant:</h2>
+        <ul>
+          <li class="text bold">
+            Te pri efficiendi assueverit, id molestie suavitate per
+          </li>
+          <li class="text bold">
+            Te nam dolorem rationibus repudiandae, ne ius falli aliquip consetetur
+          </li>
+          <li class="text bold">
+            Ut qui decant copiosae interpretaris
+          </li>
+          <li class="text bold">
+            Ut indoctum patrioque voluptaria duo, ut vis semper abhorreant
+          </li>
+        </ul>
+        <p class="text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+          Quem vide tincidunt pri ei, id mea omnium denique. 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+          Quem vide tincidunt pri ei, id mea omnium denique. 
+        </p>
+        <br/>
+        <p class="text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+          Quem vide tincidunt pri ei, id mea omnium denique. 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. 
+          Quem vide tincidunt pri ei, id mea omnium denique. 
+        </p>
       </div>
     );
   }
@@ -278,52 +409,77 @@ class ContactUsPg extends React.Component {
   render() {
     const phoneNumbersIndexes = Array.from(this.state.PhoneNumbers.keys());
     const phoneInputs = phoneNumbersIndexes.map(i => 
-      <div key={i}>
-        <label for={i}>Phone number 0{i+1}</label>
-        <input type="text" id={i} name={"PhoneNumbers[" + i + "]"} value={this.state.PhoneNumbers[i]} onChange={this.handleInputChange}/><br/>
+      <div key={i} class="full">
+        <label for={i}>Phone number 0{i+1}</label><label for={i} class="greyedLabel"> - optional</label><br/>
+        <input class="input singleInput" type="text" id={i} name={"PhoneNumbers[" + i + "]"} value={this.state.PhoneNumbers[i]} onChange={this.handleInputChange}/>
       </div>
     );
 
     const addressInputs = this.state.bIncludeAddressDetails ? 
     <div>
-      <label for="address-line-1">Address line 1</label>
-      <input type="text" id="AddressLine1" name="AddressDetails[AddressLine1]" value={this.state.AddressDetails.AddressLine1} onChange={this.handleInputChange}/><br/>
-      <label for="address-line-2">Address line 2</label>
-      <input type="text" id="AddressLine2" name="AddressDetails[AddressLine2]" value={this.state.AddressDetails.AddressLine2} onChange={this.handleInputChange}/><br/>
-      <label for="city-or-town">City/Town</label>
-      <input type="text" id="CityTown" name="AddressDetails[CityTown]" value={this.state.AddressDetails.CityTown} onChange={this.handleInputChange}/><br/>
-      <label for="state-or-county">State/County</label>
-      <input type="text" id="StateCounty" name="AddressDetails[StateCounty]" value={this.state.AddressDetails.StateCounty} onChange={this.handleInputChange}/><br/>
-      <label for="postcode">Postcode</label>
-      <input type="text" id="Postcode" name="AddressDetails[Postcode]" value={this.state.AddressDetails.Postcode} onChange={this.handleInputChange}/><br/>
-      <label for="country">Country</label>
-      <input type="text" id="Country" name="AddressDetails[Country]" value={this.state.AddressDetails.Country} onChange={this.handleInputChange}/><br/>
+      <div class="inputRow">
+        <div class="half">
+          <label for="AddressLine1">Address line 1</label><br/>
+          <input class="input" type="text" id="AddressLine1" name="AddressDetails[AddressLine1]" value={this.state.AddressDetails.AddressLine1} onChange={this.handleInputChange}/>
+        </div>
+        <div class="half">
+          <label for="AddressLine2">Address line 2</label><label for="AddressLine2" class="greyedLabel"> - optional</label><br/>
+          <input class="input" type="text" id="AddressLine2" name="AddressDetails[AddressLine2]" value={this.state.AddressDetails.AddressLine2} onChange={this.handleInputChange}/>
+        </div>
+      </div>
+
+      <div class="inputRow">
+        <div class="quarter">
+          <label for="CityTown">City/Town</label><br/>
+          <input class="input" type="text" id="CityTown" name="AddressDetails[CityTown]" value={this.state.AddressDetails.CityTown} onChange={this.handleInputChange}/>
+        </div>
+        <div class="quarter">
+          <label for="StateCounty">State/County</label><br/>
+          <input class="input" type="text" id="StateCounty" name="AddressDetails[StateCounty]" value={this.state.AddressDetails.StateCounty} onChange={this.handleInputChange}/>
+        </div>
+        <div class="quarter">
+          <label for="Postcode">Postcode</label><br/>
+          <input class="input" type="text" id="Postcode" name="AddressDetails[Postcode]" value={this.state.AddressDetails.Postcode} onChange={this.handleInputChange}/>
+        </div>
+        <div class="quarter">
+          <label for="Country">Country</label><br/>
+          <input class="input" type="text" id="Country" name="AddressDetails[Country]" value={this.state.AddressDetails.Country} onChange={this.handleInputChange}/>
+        </div>
+      </div>
     </div>
     : 
     <div/>;
 
     return(
-      <div>
-        <h1>Contact Us</h1>
-        <p>Text</p>
+      <div class="contactUsPg">
+        <h1 class="title">Contact Us</h1>
+        <p class="text bold contactUsText">Populo facilisi nam no, dolor deleniti deseruisse ne cum, nam quodsi aliquam eligendi ne. Ferri euismod accusata te nec, summo accumsan at vix.</p>
 
         <form action="https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit" method="POST" onSubmit={this.handleSubmit}>
-          <label for="full-name">Full name</label>
-          <input type="text" id="full-name" name="FullName" value={this.state.FullName} onChange={this.handleInputChange}/><br/>
-          <label for="email">Email address</label>
-          <input type="email" id="email" name="EmailAddress" value={this.state.EmailAddress} onChange={this.handleInputChange}/><br/>
-
+          <div class="inputRow">
+            <div class="half">
+              <label for="full-name">Full name</label><br/>
+              <input class="input" type="text" id="full-name" name="FullName" value={this.state.FullName} onChange={this.handleInputChange}/>
+            </div>
+            <div class="half">
+              <label for="email">Email address</label><br/>
+              <input class="input" type="email" id="email" name="EmailAddress" value={this.state.EmailAddress} onChange={this.handleInputChange}/>
+            </div>
+          </div>
+          
           <div>{phoneInputs}</div>
-          <button type="button" onClick={this.handleAddPhoneInput}>Add new phone number</button><br/>
+          <button type="button" class="blueBtn formBtn" onClick={this.handleAddPhoneInput}>Add new phone number</button><br/>
 
-          <label for="message">Message</label><br/>
-          <textarea id="message" name="Message" value={this.state.Message} onChange={this.handleInputChange}/><br/>
-
-          <input type="checkbox" id="add-address" name="bIncludeAddressDetails" checked={this.state.bIncludeAddressDetails} onChange={this.handleInputChange}/>
+          <div class="full">
+            <label for="message">Message</label><label for="message" class="greyedLabel maxLengthLabel">Maximum text length is 500 characters</label><br/>
+            <textarea class="input singleInput msgInput" id="message" name="Message" value={this.state.Message} onChange={this.handleInputChange}/>
+          </div>
+          
+          <input class="checkbox" type="checkbox" id="add-address" name="bIncludeAddressDetails" checked={this.state.bIncludeAddressDetails} onChange={this.handleInputChange}/>
           <label for="add-address">Add address details</label><br/>
           <div>{addressInputs}</div>
 
-          <input type="submit" value="Submit"/>
+          <input class="submitBtn" type="submit" value="Submit"/>
         </form>
       </div>
     );
@@ -335,7 +491,7 @@ class ContactUsPg extends React.Component {
 class LoginBtn extends React.Component {
   render() {
     return(
-      <button>Login</button>
+      <button type="button" class="blueBtn">Log in</button>
     );
   }
 }
@@ -345,12 +501,12 @@ class LoginBtn extends React.Component {
 class NavBar extends React.Component {
   render() {
     return(
-      <div>
-        <p>Company</p>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about-us">About Us</Link>
-          <Link to="/contact-us">Contact Us</Link>
+      <div class="navContainer">
+        <Logo class="logo"/>
+        <nav class="nav">
+          <Link class="link" to="/">HOME</Link>
+          <Link class="link" to="/about-us">ABOUT US</Link>
+          <Link class="link" to="/contact-us">CONTACT US</Link>
         </nav>
         <LoginBtn />
       </div>
@@ -369,7 +525,7 @@ class App extends React.Component {
           <Route path="/contact-us" element={<ContactUsPg />} />
         </Routes>
         <footer>
-          <p>Footer</p>
+          <p class="footerText">Website Development by</p><p class="footerText footerUnderline">AVAMAE</p>
         </footer>
       </div>
     );
