@@ -9,6 +9,9 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import './index.css';
 
+import imgWoman1 from "./Resources/shutterstock_407632243.jpg";
+import imgWoman2 from "./Resources/shutterstock_1302552622.jpg";
+import imgOffice1 from "./Resources/shutterstock_696636346.jpg";
 import imgOffice2 from "./Resources/shutterstock_696636415.jpg";
 import { ReactComponent as Logo } from "./Resources/Logo.svg";
 
@@ -16,7 +19,23 @@ import { ReactComponent as Logo } from "./Resources/Logo.svg";
 
 class HomePg extends React.Component {
   render() {
-    const { titles, subtitles, imageUrls} = this.props;
+    // The server has since been removed
+    // const { titles, subtitles, imageUrls} = this.props;
+    const titles = [
+      "Lorem ipsum dolor sit amet",
+      "Viverra suspendisse potenti",
+      "Quem vide tincidunt pri ei",
+    ];
+    const subtitles = [
+      "Te pri efficiendi assueverit, id molestie suavitate per",
+      "Te nam dolorem rationibus repudiandae, ne ius falli aliquip consetetur",
+      "Ut qui decant copiosae interpretaris",
+    ];
+    const imageUrls = [
+      imgWoman1,
+      imgOffice1,
+      imgWoman2,
+    ];
 
     return(
       <div>
@@ -295,6 +314,7 @@ class ContactUsPg extends React.Component {
 
     const postData = structuredClone(this.state);
 
+    // Sever now down
     fetch("https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit", {
       method: "Post",
       headers: {"Content-Type": "application/json",},
