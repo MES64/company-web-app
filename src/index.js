@@ -434,9 +434,9 @@ class NavBar extends React.Component {
       <div class="navContainer">
         <Logo class="logo"/>
         <nav class="nav">
-          <Link class="link" to="/">HOME</Link>
-          <Link class="link" to="/about-us">ABOUT US</Link>
-          <Link class="link" to="/contact-us">CONTACT US</Link>
+          <Link class="link" to="/company-web-app">HOME</Link>
+          <Link class="link" to="/company-web-app/about-us">ABOUT US</Link>
+          <Link class="link" to="/company-web-app/contact-us">CONTACT US</Link>
         </nav>
         <LoginBtn />
       </div>
