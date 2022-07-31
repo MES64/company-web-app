@@ -51,7 +51,7 @@ class HomePg extends React.Component {
             <div class="carouselImg">
               <h1 class="carouselGeneralText carouselTitle">{titles[0]}</h1>
               <h2 class="carouselGeneralText carouselText">{subtitles[0]}</h2>
-              <Link class="btnLink carouselBtn" to="/contact-us">Contact Us</Link>
+              <Link class="btnLink carouselBtn" to="/company-web-app/contact-us">Contact Us</Link>
               <img src={imageUrls[0]} alt="" class="img img1"/>
             </div>
           </SwiperSlide>
@@ -96,7 +96,7 @@ class HomePg extends React.Component {
               </li>
             </ul>
             <br/>
-            <Link class="btnLink" to="/about-us">Learn More</Link>
+            <Link class="btnLink" to="/company-web-app/about-us">Learn More</Link>
           </div>
           <img src={imgOffice2} class="learnMoreImg"/>
         </div>
@@ -176,7 +176,7 @@ class HomePg extends React.Component {
               </p>
             </div>
           </div>
-          <Link class="btnLink" to="/contact-us">Contact Us</Link>
+          <Link class="btnLink" to="/company-web-app/contact-us">Contact Us</Link>
         </div>
       </div>
     );
@@ -434,7 +434,7 @@ class NavBar extends React.Component {
       <div class="navContainer">
         <Logo class="logo"/>
         <nav class="nav">
-          <Link class="link" to="/company-web-app">HOME</Link>
+          <Link class="link" to="/company-web-app/">HOME</Link>
           <Link class="link" to="/company-web-app/about-us">ABOUT US</Link>
           <Link class="link" to="/company-web-app/contact-us">CONTACT US</Link>
         </nav>
@@ -473,9 +473,9 @@ class App extends React.Component {
       <div>
         <NavBar />
         <Routes>
-          <Route path="/" element={<HomePg titles={this.state.titles} subtitles={this.state.subtitles} imageUrls={this.state.imageUrls} />} />
-          <Route path="/about-us" element={<AboutUsPg />} />
-          <Route path="/contact-us" element={<ContactUsPg />} />
+          <Route path="/company-web-app/" element={<HomePg titles={this.state.titles} subtitles={this.state.subtitles} imageUrls={this.state.imageUrls} />} />
+          <Route path="/company-web-app/about-us" element={<AboutUsPg />} />
+          <Route path="/company-web-app/contact-us" element={<ContactUsPg />} />
         </Routes>
         <footer>
           <p class="footerText">Website Development by</p><p class="footerText footerUnderline">AVAMAE</p>
